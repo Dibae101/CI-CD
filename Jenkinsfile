@@ -38,7 +38,6 @@ pipeline {
 	sh 'docker push json101/samplewebapp:latest' 
         }
                   
-          }
         }
      
       stage('Run Docker container on Jenkins Agent') {
@@ -58,4 +57,3 @@ pipeline {
         }
     }
 }
-    
