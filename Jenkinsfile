@@ -53,7 +53,9 @@ pipeline {
             steps {
              echo 'The Job has been tested!'    
  
+                }
             }
         }
     }
+
 }
