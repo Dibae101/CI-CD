@@ -33,9 +33,9 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "json101", variable: 'dockerhubpwd, url: "" ]) {
+        withDockerRegistry([ credentialsId: "json101", variable: 'dockerhubpwd']){
         sh 'docker login -u json101 -p ${dockerhubpwd}'   
-	sh 'docker push json101/samplewebapp:latest' 
+	    sh 'docker push json101/samplewebapp:latest' 
         }
                   
         }
