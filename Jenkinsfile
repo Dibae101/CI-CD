@@ -3,17 +3,17 @@ pipeline {
 	
 	  tools
     {
-       maven "maven"
+       maven "Maven"
     }
  stages {
-      stage('checkout') {
+        stage('checkout') {
            steps {
              
                 git branch: 'master', url: 'https://github.com/Dibae101/CI-CD.git'
              
           }
         }
-	 stage('Execute Maven') {
+	    stage('Execute Maven') {
            steps {
              
                 sh 'mvn package'             
@@ -21,7 +21,7 @@ pipeline {
         }
         
 
-  stage('Docker Build and Tag') {
+        stage('Docker Build and Tag') {
            steps {
               
                 sh 'docker build -t samplewebapp:latest .'  
@@ -30,7 +30,7 @@ pipeline {
           }
         }
      
-  stage('Publish image to Docker Hub') {
+        stage('Publish image to Docker Hub') {
           
             steps {
         withDockerRegistry([ credentialsId: "json101", variable: 'dockerhubpwd']){
@@ -40,15 +40,15 @@ pipeline {
                   
         }
      
-      stage('Run Docker container on Jenkins Agent') {
-             
+        stage('Run Docker container on Jenkins Agent') {
+            
             steps 
 			{
                 sh "docker run -d -p 8003:8080 json101/samplewebapp"
  
             }
         }
- stage('Test') {
+        stage('Test') {
              
             steps {
              echo 'The Job has been tested!'    
