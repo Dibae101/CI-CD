@@ -3,7 +3,7 @@ pipeline {
 	
 	  tools
     {
-       maven "Maven"
+       maven "maven"
     }
  stages {
         stage('checkout') {
@@ -12,9 +12,8 @@ pipeline {
              
           }
         }
-	    stage('Execute Maven') {
+	stage('Execute Maven') {
            steps {
-             
                 sh 'mvn package'             
           }
         }
@@ -31,15 +30,14 @@ pipeline {
             steps {
                 withDockerRegistry([ credentialsId: "json101", variable: 'dockerhubpwd']){
                 sh 'docker login -u json101 -p ${dockerhubpwd}'   
-	            sh 'docker push json101/samplewebapp:latest' 
+	        sh 'docker push json101/samplewebapp:latest' 
         }
                   
         }
      
         stage('Run Docker container on Jenkins Agent') {
-            
             steps 
-			{
+		{
                 sh "docker run -d -p 8003:8080 json101/samplewebapp"
  
             }
